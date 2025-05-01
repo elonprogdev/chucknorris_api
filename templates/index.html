@@ -1,0 +1,41 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<h1>"The Chuck Norris API"</h1>
+<h3>Добро пожаловать на наш сайт!</h3>
+
+<img src="  https://th.bing.com/th/id/R.192ae25c5ba25208d0e236441fe6fad5?rik=%2fDR%2bqUugTsWmvg&riu=http%3a%2f%2fpngimg.com%2fuploads%2fchuck_norris%2fchuck_norris_PNG6.png&ehk=wJXlRI7dq%2fogHspl2oZ42U%2bvXbkqUJuYxPWNMGvGIDw%3d&risl=&pid=ImgRaw&r=0   " width ="250", height = "250"/>
+<br>
+<br>
+
+<form action="/jokes" method="POST">
+    <label for="category">Category of joke:</label>
+    <select id="category" name="category" required>
+        <option value="" disabled selected>Select a category</option>
+        {% for i in categories %}
+            <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="quantity">Number of jokes:</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="10" placeholder="Enter number of jokes" required required style="width: 138px;">
+    <br>
+    <button type="submit">Get Jokes</button>
+</form>
+<br>
+<h3>
+
+<br>
+</body>
+</html>
