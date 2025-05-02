@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for, redirect
 import requests
 
 app = Flask(__name__)
@@ -14,12 +14,23 @@ categories = [
 def index():
     return render_template("index.html", categories=categories)
 
-@app.route("/jokes", methods=["POST"])
+@app.route("/next_block", methods=["GET"])
+def next_block():
+    category = request.args.get("category")
+    quantity = request.args.get("quantity")
+    print(url_for("get_jokes", category=category, quantity=quantity))
+    print("-------------")
+    print(redirect(url_for("get_jokes", category=category, quantity=quantity)))
+    print(redirect(url_for("get_jokes", category=category, quantity=quantity)).data)
+    
+    return redirect(url_for("get_jokes", category=category, quantity=quantity))
+
+@app.route("/jokes", methods=["GET"])
 def get_jokes():
     # Получаем данные из формы
-    category = request.form.get("category")
+    category = request.args.get("category")
     try:
-        quantity = int(request.form.get("quantity"))
+        quantity = int(request.args.get("quantity"))
     except (ValueError, TypeError):
         quantity = 1  # По умолчанию 1 шутка, если ввод некорректен
 
@@ -40,7 +51,7 @@ def get_jokes():
             continue  # Пропускаем ошибочный запрос
 
     # Рендерим шаблон с шутками
-    return render_template("jocke.html", jokes=jokes, category=category)
+    return render_template("jocke.html", jokes=jokes, category=category, quantity=quantity)
 
 if __name__ == "__main__":
     app.run(debug=True)

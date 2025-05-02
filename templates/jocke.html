@@ -14,6 +14,15 @@
     {% else %}
         <p>No jokes found for this category.</p>
     {% endif %}
+    
+    <form action="/next_block" method="GET"> 
+    <br>
+    <input name="category", value="{{category}}" hidden>
+    <input name="quantity", value="{{quantity}}" hidden>
+    <button type="submit">Next</button>
+    </form>
+    <br>
+
     <a href="/">Back to form</a>
 </body>
 </html>
